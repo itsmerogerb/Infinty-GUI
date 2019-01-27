@@ -1,0 +1,141 @@
+<!doctype html>
+<!-- Roger Bryant -->
+<html lang="en">
+<head>
+<style>
+html{
+	width:100%;
+}
+body{
+	width:75%;
+	background-color: gainsboro;
+	margin-left:auto;
+	margin-right:auto;
+	font-family: Garamond, Arial, serif;
+	
+	
+}
+fieldset{
+
+	margin-bottom:.1em;
+	padding:5%;
+	margin-right:15%;
+	
+}
+
+legend{
+	color: black;
+	text-shadow: 2px 2px 4px grey;
+}
+footer{
+	border-top: silver ridge;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: .5em;
+	padding-bottom:.1em;
+	font-size:.8em;
+}
+
+
+
+.sitehead{
+	text-align:center;
+	border-bottom: silver ridge;
+	margin-bottom: 1em;
+	color: snow;
+	text-shadow: 2px 2px 4px black;
+	
+}
+.sitebody,.completed{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+	padding-bottom:2em;
+	
+}
+
+textarea {
+
+width: 30em;
+height: .5em;
+
+}
+button{
+	width:15em;
+	margin-left:auto;
+	margin-right:auto;
+}
+.button{ 
+	text-align:center;
+	
+	
+}
+
+
+</style>
+<script src="jquery-3.3.1.min.js"></script>
+<title> Rerate Tool</title>
+<meta charset = "UTF-8">
+</head>
+<body>
+<div class="sitehead">
+
+	<h1 id="header">Infinity Rerate Tool</h1>
+</div>
+
+<div class="sitebody">
+	
+	<legend> Enter Mins,Texts or Data </legend>
+	<input type="text" id = "custUsage">
+	<legend> Enter Rate Charged(ie. 15) </legend>
+	<input type="text" id = "oldRate">
+	<legend> Enter new Rate(ie. 2) </legend>
+	<input type="text" id = "newRate">
+	
+</div>
+
+<div class ="completed">
+	<fieldset>
+	<p>Credit Due: $<span id="billSummary"> ####</span></p>
+	<p>Customer Owes: $<span id="usageDetails"> ####</span></p>
+	<p>Math: <span id="math"> ####</span></p>
+
+<div class ="button">
+		<button id="runbtn" onclick="calcCredit()"> Calculate </button>
+		</div>
+	</div>
+	
+	</fieldset>
+		
+<div class ="sitefooter">
+
+</div>
+
+</body>
+</html>
+<script>
+
+function calcCredit(){
+
+var cstUsage = $('#custUsage').val().split('\n');
+var oldRate = $('#oldRate').val().split('\n');
+var newRate = $('#newRate').val().split('\n');
+var oldAmount = cstUsage * oldRate;
+var newAmount = cstUsage * newRate;
+var creditAmount = oldAmount - newAmount;
+
+if (Number.isNaN(creditAmount) == true) {
+alert("Please enter a number, not a special character");
+}
+else
+{
+$('#billSummary').html(creditAmount);
+$('#usageDetails').html(newAmount);
+$('#math').html("<br>Billed amount :" + cstUsage + "* $" + oldRate + "= $" + oldAmount  + "<br> Rereated Amount :"+ cstUsage + "* $" +newRate + "= $" +newAmount + "<br> Credit amount = $" + creditAmount);
+}
+}
+
+
+
+</script>
